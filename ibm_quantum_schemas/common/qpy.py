@@ -297,6 +297,19 @@ class QpyModelV13ToV17(QpyModel):
     qpy_version: int = Field(ge=13, le=17)
 
 
+class UnrestrictedCompressedQpyDataModel(CompressedQpyDataModel[T], Generic[T]):
+    """Compressed QPY encoded circuit list with no QPY version restrictions.
+
+    Unlike the version-restricted data models, this model accepts any QPY version.
+    It is intended for internal development, testing, and experimentation where
+    support for new or unsupported QPY versions is required.
+
+    Third-party clients should use one of the version-restricted models instead.
+    """
+
+    qpy_version: int
+
+
 class QpyDataV13ToV17Model(QpyDataModel[T], Generic[T]):
     """QPY encoded circuit list with restricted version range."""
 

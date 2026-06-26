@@ -21,6 +21,7 @@ from samplomatic import Twirl, build
 
 from ibm_quantum_schemas.common.qpy import CompressedQpyDataV13ToV17Model as QpyDataModel
 from ibm_quantum_schemas.common.samplex import SamplexModelSSV1ToSSV4 as SamplexModel
+from ibm_quantum_schemas.common.samplex import UnrestrictedSamplexModel
 from ibm_quantum_schemas.common.tensor import CompressedTensorModel, F64CompressedTensorModel
 from ibm_quantum_schemas.executor.version_2_0_dev import (
     ChunkPart,
@@ -88,7 +89,7 @@ def test_initialization_params_model(qpy_version, ssv, chunk_size):
         circuit1.measure_all()
     template, samplex = build(circuit1)
     samplex_item = SamplexItemModel(
-        samplex=SamplexModel.from_samplex(samplex, ssv=ssv),
+        samplex=UnrestrictedSamplexModel.from_samplex(samplex, ssv=ssv),
         samplex_arguments={
             "parameter_values": CompressedTensorModel.from_numpy(
                 np.array([0.1, 0.2, 0.3], dtype=np.float64)

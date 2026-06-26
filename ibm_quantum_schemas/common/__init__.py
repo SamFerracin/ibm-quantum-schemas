@@ -54,6 +54,7 @@ from ibm_quantum_schemas.common.qpy import (
     QpyModel,
     QpyModelV13ToV16,
     QpyModelV13ToV17,
+    UnrestrictedCompressedQpyDataModel,
 )
 from ibm_quantum_schemas.common.samplex import (
     SamplexModel,
@@ -61,6 +62,7 @@ from ibm_quantum_schemas.common.samplex import (
     SamplexModelSSV1ToSSV2,
     SamplexModelSSV1ToSSV3,
     SamplexModelSSV1ToSSV4,
+    UnrestrictedSamplexModel,
 )
 from ibm_quantum_schemas.common.tensor import (
     CompressedTensorModel,

@@ -90,6 +90,19 @@ class SamplexModel(BaseModel):
         return obj
 
 
+class UnrestrictedSamplexModel(SamplexModel):
+    """A samplex model with no restrictions on the samplex serialization version (SSV).
+
+    Unlike the version-restricted samplex models, this model accepts any SSV. It is intended for
+    internal development, testing, and experimentation where support for new or unsupported QPY
+    versions is required.
+
+    Third-party clients should use one of the version-restricted models instead.
+    """
+
+    qpy_version: int
+
+
 class SamplexModelSSV1(SamplexModel):
     """A samplex model constrained to use samplex serialization version (SSV) 1."""
 

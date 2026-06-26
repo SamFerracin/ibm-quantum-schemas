@@ -28,6 +28,8 @@ from ibm_quantum_schemas.common import (
     CompressedTensorModel,
     F64CompressedTensorModel,
     PauliLindbladMapModel,
+    UnrestrictedCompressedQpyDataModel,
+    UnrestrictedSamplexModel,
 )
 from ibm_quantum_schemas.common import SamplexModelSSV1ToSSV4 as SamplexModel
 
@@ -139,7 +141,7 @@ class SamplexItemModel(BaseModel):
     item_type: Literal["samplex"] = "samplex"
     """The type of quantum program item."""
 
-    samplex: SamplexModel
+    samplex: SamplexModel | UnrestrictedSamplexModel
     """A JSON-encoded samplex."""
 
     samplex_arguments: dict[str, bool | int | PauliLindbladMapModel | CompressedTensorModel]
@@ -168,7 +170,10 @@ class QuantumProgramModel(BaseModel):
     shots: int = Field(ge=1)
     """The number of shots for each individually bound circuit."""
 
-    circuits: CompressedQpyDataV13ToV17Model[QuantumCircuit]
+    circuits: (
+        CompressedQpyDataV13ToV17Model[QuantumCircuit]
+        | UnrestrictedCompressedQpyDataModel[QuantumCircuit]
+    )
     """One quantum circuit for every element of ``items``.
 
     These are stored outside of ``items`` to cosituate them inside of one QPY blob.
